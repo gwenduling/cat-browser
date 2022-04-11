@@ -1,10 +1,20 @@
+.cats-list-component {
+  > p {
+    margin-top: var(--padding);
+    text-align: center;
+  }
+
+  > button {
+    margin-top: var(--padding);
+  }
+}
+
 .cats-list {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: var(--padding);
   align-items: flex-start;
   margin-top: var(--padding);
-  margin-bottom: var(--padding);
 
   .cat-item {
     border: 1px solid var(--color-border);

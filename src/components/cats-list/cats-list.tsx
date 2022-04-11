@@ -85,28 +85,31 @@ function CatsList () {
     }
   }, [page, catContext.breed]);
 
-  return <div>
+  return <div className="cats-list-component">
     <div className="cats-list">
-      {cats.length === 0
-        ? <p>No cats available</p>
-        : cats.map((cat: Cat, index: number) =>
-          <div className="cat-item" key={index}>
-            <img src={cat.url} alt={cat.breeds?.[0]?.name}/>
-            <div className="content">
-              <Button
-                content="View Details"
-                block={true}
-                onClick={() => {
-                  navigate(
-                    `../${cat.id}`,
-                    { replace: true }
-                  );
-                }}
-              />
-            </div>
+      {cats.map((cat: Cat, index: number) =>
+        <div className="cat-item" key={index}>
+          <img src={cat.url} alt={cat.breeds?.[0]?.name}/>
+          <div className="content">
+            <Button
+              content="View Details"
+              block={true}
+              onClick={() => {
+                navigate(
+                  `../${cat.id}`,
+                  { replace: true }
+                );
+              }}
+            />
           </div>
-        )}
+        </div>
+      )}
     </div>
+
+    {catContext.loadingStatus === LoadingStatus.Loading && <p>Loading ...</p>}
+
+    {catContext.loadingStatus === LoadingStatus.Loaded &&
+      cats.length === 0 && <p>No cats available</p>}
 
     { showLoadMore
       ? <Button
