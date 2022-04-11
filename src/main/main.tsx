@@ -1,6 +1,6 @@
 import "./main.scss";
 
-function Main() {
+function Main () {
   return (
     <div className="body-root">
       <div className="body-header"> {/* TODO: header */} </div>
