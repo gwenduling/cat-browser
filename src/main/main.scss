@@ -1,0 +1,18 @@
+.body-root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: relative;
+
+  .body-header {
+    flex-basis: 60px;
+  }
+
+  .body-main {
+    display: flex;
+    flex-direction: column;
+    padding: var(--padding);
+    flex-grow: 1;
+    overflow: auto;
+  }
+}
