@@ -12,6 +12,7 @@
 - [TypeScript](https://www.typescriptlang.org/)
 - [Scss](https://sass-lang.com/)
 - [ESLint](https://eslint.org/)
+- [Jest](https://jestjs.io/)
 
 ## Scripts
 
@@ -20,3 +21,5 @@
 - `npm run build` - builds the application
 - `npm run lint` - run ESLint
 - `npm run lint:fix` - run ESLint and fix errors
+- `npm run test` - run jest tests
+

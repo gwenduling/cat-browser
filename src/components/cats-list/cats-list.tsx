@@ -32,14 +32,13 @@ function CatsList () {
     };
 
     let pageCount: number;
-
     catContext.updateLoadingStatus(LoadingStatus.Loading);
     fetch(
       `${BASE_URL}images/search?page=${page}&limit=10&breed_id=${catContext.breed}`,
       { headers: { "x-api-key": API_KEY } }
     )
       .then((res) => {
-        const pageCountString = res.headers.get("pagination-count");
+        const pageCountString = res?.headers?.get("pagination-count");
         if (pageCountString) {
           pageCount = parseInt(pageCountString, 0);
         }

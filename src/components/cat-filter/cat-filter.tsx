@@ -33,6 +33,7 @@ function CatFilter () {
       onChange={(val) => catContext.updateBreed(val.target.value)}
       value={catContext.breed}
       disabled={catContext.loadingStatus === LoadingStatus.Loading}
+      data-testid="filter"
     >
       {[defaultOption].concat(breeds).map((breed: Breed, i: number) => (
         <option key={i} value={breed.id}> {breed.name} </option>
