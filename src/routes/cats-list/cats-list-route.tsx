@@ -1,6 +1,13 @@
+import CatFilter from "../../components/cat-filter/cat-filter";
+import CatsList from "../../components/cats-list/cats-list";
+
+import "./cats-list-route.scss";
+
 function CatsListRoute () {
-  // TODO: Cats List Route
-  return <div>Cats List Route</div>;
+  return <div className="cats-list-route _container">
+    <CatFilter/>
+    <CatsList/>
+  </div>;
 }
 
 export default CatsListRoute;

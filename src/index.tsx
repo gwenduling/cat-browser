@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 
 import "./styles/properties.scss";
 import "./styles/global.scss";
+import "./styles/helpers.scss";
 
 import Main from "./main/main";
 import reportWebVitals from "./reportWebVitals";

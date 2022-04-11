@@ -1,0 +1,24 @@
+.cats-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: var(--padding);
+  align-items: flex-start;
+  margin-top: var(--padding);
+  margin-bottom: var(--padding);
+
+  .cat-item {
+    border: 1px solid var(--color-border);
+    border-radius: 3px;
+    .content {
+      padding: var(--padding);
+    }
+  }
+
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
