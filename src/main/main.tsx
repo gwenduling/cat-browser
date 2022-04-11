@@ -31,7 +31,7 @@ function Main () {
         <main className="body-main">
           <Routes>
             <Route path="/" element={<CatsListRoute />}></Route>
-            <Route path="/cat" element={<CatDetailsRoute />}></Route>
+            <Route path="/:id" element={<CatDetailsRoute />}></Route>
           </Routes>
         </main>
       </div>

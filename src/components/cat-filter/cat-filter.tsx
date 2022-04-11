@@ -23,7 +23,7 @@ function CatFilter () {
       });
   }, []);
 
-  return <div className="cat-filter _flex">
+  return <div className="cat-filter">
     <p className="label">Breed:</p>&nbsp;
     <select
       className="_input"

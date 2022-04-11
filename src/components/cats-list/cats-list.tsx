@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import CatContext from "../../context/cat-context";
 import { API_KEY, BASE_URL } from "../../data/constants";
 import { Cat } from "../../models/cat";
@@ -13,6 +14,7 @@ function CatsList () {
   const [pageCount, setPageCount] = useState(0);
   const [showLoadMore, setShowLoadMore] = useState(false);
   const catContext = useContext(CatContext);
+  const navigate = useNavigate();
 
   const loadCats = () => {
     if (catContext.breed === "") return;
@@ -73,7 +75,10 @@ function CatsList () {
                 content="View Details"
                 block={true}
                 onClick={() => {
-                /* TODO: navigate to details route */
+                  navigate(
+                    `../${cat.id}`,
+                    { replace: true }
+                  );
                 }}
               />
             </div>

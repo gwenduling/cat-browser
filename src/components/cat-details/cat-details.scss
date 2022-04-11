@@ -1,0 +1,20 @@
+.cat-details {
+  > button {
+    margin-bottom: var(--padding);
+  }
+
+  .name {
+    font-size: 25px;
+    font-weight: 700;
+  }
+
+  .origin {
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .temperament {
+    margin-bottom: var(--padding);
+    font-size: 16px;
+  }
+}
