@@ -8,4 +8,8 @@
   --color-select: #ccc;
   --color-accent: #2b444f;
   --color-success: #495a48;
+
+
+  // overwrite toastify
+  --toastify-color-light: var(--color-bg);
 }

@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import CatContext from "../../context/cat-context";
-import { API_KEY, BASE_URL } from "../../data/constants";
+import { API_KEY, BASE_URL, DEFAULT_ERROR_MESSAGE } from "../../data/constants";
 import { Cat } from "../../models/cat";
 import { LoadingStatus } from "../../models/status";
 import Button from "../button/button";
@@ -33,6 +34,27 @@ function CatsList () {
         return res.json();
       })
       .then((res) => {
+        // notify errors passed in response with message
+        if (res.status &&
+          res.status !== 200 &&
+          res.message) {
+          toast(res.message, { type: "error" });
+          return;
+        }
+
+        /**
+         * notify error when info from count expects a
+         * response but API responded with empty array
+         */
+        if (res.length === 0) {
+          toast(DEFAULT_ERROR_MESSAGE, { type: "error" });
+
+          if (page === 1) {
+            setCats([]);
+          }
+          return;
+        }
+
         if (page === 1) {
           setCats(res);
         } else {
@@ -46,7 +68,7 @@ function CatsList () {
         }
         setPage(page + 1);
       }).catch(() => {
-        // TODO: Notify error
+        toast(DEFAULT_ERROR_MESSAGE, { type: "error" });
       })
       .finally(() => {
         catContext.updateLoadingStatus(LoadingStatus.Loaded);

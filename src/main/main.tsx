@@ -5,6 +5,8 @@ import { Breed } from "../models/breeds";
 import { LoadingStatus } from "../models/status";
 import CatDetailsRoute from "../routes/cat-details/cat-details-route";
 import CatsListRoute from "../routes/cats-list/cats-list-route";
+import { ToastContainer } from "react-toastify";
+
 import "./main.scss";
 
 function Main () {
@@ -34,6 +36,17 @@ function Main () {
             <Route path="/:id" element={<CatDetailsRoute />}></Route>
           </Routes>
         </main>
+        <ToastContainer
+          position="top-right"
+          autoClose={2000}
+          hideProgressBar={true}
+          newestOnTop
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </div>
     </CatContext.Provider>
   );

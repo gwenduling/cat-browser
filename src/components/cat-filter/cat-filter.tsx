@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import CatContext from "../../context/cat-context";
-import { BASE_URL } from "../../data/constants";
+import { API_KEY, BASE_URL, DEFAULT_ERROR_MESSAGE } from "../../data/constants";
 import { Breed } from "../../models/breeds";
 import { LoadingStatus } from "../../models/status";
 
@@ -16,10 +17,12 @@ function CatFilter () {
   };
 
   useEffect(() => {
-    fetch(BASE_URL + "breeds")
+    fetch(BASE_URL + "breeds", { headers: { "x-api-key": API_KEY } })
       .then((res) => res.json())
       .then((res) => {
         setBreeds(res);
+      }).catch(() => {
+        toast(DEFAULT_ERROR_MESSAGE, { type: "error" });
       });
   }, []);
 

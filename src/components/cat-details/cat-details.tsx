@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { API_KEY, BASE_URL } from "../../data/constants";
+import { toast } from "react-toastify";
+import { API_KEY, BASE_URL, DEFAULT_ERROR_MESSAGE } from "../../data/constants";
 import { Cat } from "../../models/cat";
 import Button from "../button/button";
 
@@ -14,9 +15,17 @@ function CatDetails (props: Props) {
     fetch(BASE_URL + `images/${props.id}`, { headers: { "x-api-key": API_KEY } })
       .then((res) => res.json())
       .then((res) => {
+        // notify errors passed in response with message
+        if (res.status &&
+          res.status !== 200 &&
+          res.message) {
+          toast(res.message, { type: "error" });
+          return;
+        }
+
         setCat(res);
       }).catch(() => {
-        // TODO: Notify error
+        toast(DEFAULT_ERROR_MESSAGE, { type: "error" });
       });
   }, [props.id]);
 
