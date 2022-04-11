@@ -12,23 +12,36 @@ import "./cats-list.scss";
 function CatsList () {
   const [cats, setCats] = useState([] as Cat[]);
   const [page, setPage] = useState(1);
-  const [pageCount, setPageCount] = useState(0);
   const [showLoadMore, setShowLoadMore] = useState(false);
   const catContext = useContext(CatContext);
   const navigate = useNavigate();
 
+  const showError = (message: string): void => {
+    toast(message, { type: "error" });
+    if (page === 1) {
+      setCats([]);
+      setShowLoadMore(false);
+    }
+  };
+
   const loadCats = () => {
-    if (catContext.breed === "") return;
+    if (catContext.breed === "") {
+      setCats([]);
+      setShowLoadMore(false);
+      return;
+    };
+
+    let pageCount: number;
 
     catContext.updateLoadingStatus(LoadingStatus.Loading);
     fetch(
-      `${BASE_URL}images/search?order=ASC&page=${page}&limit=10&breed_id=${catContext.breed}`,
+      `${BASE_URL}images/search?page=${page}&limit=10&breed_id=${catContext.breed}`,
       { headers: { "x-api-key": API_KEY } }
     )
       .then((res) => {
-        const paginationCount = res.headers.get("pagination-count");
-        if (paginationCount) {
-          setPageCount(parseInt(paginationCount, 0));
+        const pageCountString = res.headers.get("pagination-count");
+        if (pageCountString) {
+          pageCount = parseInt(pageCountString, 0);
         }
 
         return res.json();
@@ -38,7 +51,7 @@ function CatsList () {
         if (res.status &&
           res.status !== 200 &&
           res.message) {
-          toast(res.message, { type: "error" });
+          showError(res.message);
           return;
         }
 
@@ -47,19 +60,11 @@ function CatsList () {
          * response but API responded with empty array
          */
         if (res.length === 0) {
-          toast(DEFAULT_ERROR_MESSAGE, { type: "error" });
-
-          if (page === 1) {
-            setCats([]);
-          }
+          showError(DEFAULT_ERROR_MESSAGE);
           return;
         }
 
-        if (page === 1) {
-          setCats(res);
-        } else {
-          setCats(cats.concat(res));
-        }
+        setCats(page === 1 ? res : cats.concat(res));
 
         if (pageCount <= (page * 10)) {
           setShowLoadMore(false);
@@ -68,7 +73,7 @@ function CatsList () {
         }
         setPage(page + 1);
       }).catch(() => {
-        toast(DEFAULT_ERROR_MESSAGE, { type: "error" });
+        showError(DEFAULT_ERROR_MESSAGE);
       })
       .finally(() => {
         catContext.updateLoadingStatus(LoadingStatus.Loaded);
