@@ -29,7 +29,7 @@ function Main () {
   return (
     <CatContext.Provider value={getContextValue()}>
       <div className="body-root">
-        <div className="body-header"> {/* TODO: header */} </div>
+        <header className="body-header _container"> <h1>Cat Browser</h1> </header>
         <main className="body-main">
           <Routes>
             <Route path="/" element={<CatsListRoute />}></Route>

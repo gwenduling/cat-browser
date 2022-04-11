@@ -5,7 +5,9 @@
   position: relative;
 
   .body-header {
-    flex-basis: 60px;
+    flex-shrink: 0;
+    color: var(--color-accent);
+    border-bottom: 1px solid var(--color-border);
   }
 
   .body-main {
